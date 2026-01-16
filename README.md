@@ -4,15 +4,12 @@
   <p>
     <img src="https://img.shields.io/badge/Python-3.10+-blue" alt="Python Version">
     <img src="https://img.shields.io/badge/Focus-VTB%20Live-pink" alt="Focus">
-    <img src="https://img.shields.io/github/license/lingbai-i/YueLi?label=协议" alt="License">
   </p>
 
   <p>面向直播互动的 AI 智能体，让虚拟主播更“像人”</p>
 </div>
 
 <br>
-
-<img src="./YueLiBot/depends-data/maimai-v2.png" align="right" width="30%" alt="YueLiBot Character" style="margin-left: 20px; margin-bottom: 20px;">
 
 ## 📖 项目简介
 
