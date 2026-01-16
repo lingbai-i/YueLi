@@ -1,0 +1,4 @@
+aiohttp>=3.9.0
+blivedm>=0.1.0
+pygame>=2.5.0
+maim-message

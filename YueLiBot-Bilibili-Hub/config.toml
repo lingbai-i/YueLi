@@ -1,0 +1,24 @@
+[Bilibili]
+room_id = 23838688
+uid = 235611641
+sessdata = "3fe43567%2C1784046373%2C145e3%2A12CjBLRDF4w329v-u_IEPWgAC1KEy9RIkxzhwaHlAgPg6hnB22PXc3PR-0Jj2gGmAuzuMSVmw2Qk8xbFFUY0tTeldYR0NNbGxlQkVGZDRDVHdQcG5PZU5zY3hxclllcG9BRTFjcG1YWHlOMnh6ZExlTEJicXFQQmFZSHE2c0tJMGpYdzJMOVJlRXVBIIEC"
+bili_jct = "72d8ae8a191c43dac3a29bff3714a937"
+buvid3 = "ABBE7FB7-204F-6BC0-8466-D13B92E84ABB66497infoc"
+dedeuserid = "235611641"
+
+[YueLiBot_Server]
+host = "localhost"
+port = 8000
+token = ""
+platform_name = "bilibili"
+
+[Filter]
+min_score = 0      # 测试模式：不过滤
+reply_interval = 1 # 缩短间隔
+
+[Priority]
+super_chat = 100
+gift = 80
+guard = 90
+danmaku = 50
+
