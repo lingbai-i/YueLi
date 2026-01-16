@@ -14,6 +14,7 @@ from src.chat.heart_flow.heartflow_message_processor import HeartFCMessageReceiv
 from src.chat.utils.prompt_builder import Prompt, global_prompt_manager
 from src.plugin_system.core import component_registry, events_manager, global_announcement_manager
 from src.plugin_system.base import BaseCommand, EventType
+from src.common.safety.safety_filter import SafetyFilter
 
 # 定义日志配置
 
@@ -65,6 +66,27 @@ def _check_ban_regex(text: str, userinfo: UserInfo, group_info: Optional[GroupIn
             logger.info(f"[{chat_name}]{userinfo.user_nickname}:{text}")
             logger.info(f"[正则表达式过滤]消息匹配到{pattern}，filtered")
             return True
+    return False
+
+
+def _check_ai_safety(text: str, userinfo: UserInfo, group_info: Optional[GroupInfo] = None) -> bool:
+    """检查消息是否通过AI安全过滤器
+    
+    Returns:
+        bool: True 表示不安全（需要过滤），False 表示安全
+    """
+    safety_filter = SafetyFilter()
+    # 如果过滤器未启用（例如模型未加载），则跳过检查
+    if not safety_filter.enabled:
+        return False
+
+    is_safe, reason, score = safety_filter.check_is_safe(text)
+    if not is_safe:
+        chat_name = group_info.group_name if group_info else "私聊"
+        user_name = userinfo.user_nickname if userinfo else "未知用户"
+        logger.warning(f"[{chat_name}]{user_name}:{text}")
+        logger.warning(f"[AI安全过滤] 检测到潜在威胁: {reason} (置信度: {score:.4f})，已拦截")
+        return True
     return False
 
 
@@ -277,6 +299,10 @@ class ChatBot:
                 group_info,
             ) or _check_ban_regex(
                 message.raw_message,  # type: ignore
+                user_info,  # type: ignore
+                group_info,
+            ) or _check_ai_safety(
+                message.processed_plain_text,
                 user_info,  # type: ignore
                 group_info,
             ):

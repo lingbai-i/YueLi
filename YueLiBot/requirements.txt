@@ -33,3 +33,5 @@ zstandard
 soundfile>=0.12.1
 SoundCard>=0.4.3
 pyautogui>=0.9.54
+transformers>=4.40.0
+torch>=2.0.0
